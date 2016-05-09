@@ -1,0 +1,12 @@
+{
+  "parser": "babel-eslint",
+  "extends": "standard",
+  "rules": {
+    "react/jsx-uses-react": 2,
+    "react/jsx-no-undef": 2,
+    "react/jsx-uses-vars": 2
+  },
+  "plugins": [
+    "react"
+  ]
+}

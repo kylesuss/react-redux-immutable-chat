@@ -1,6 +1,7 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const env = process.env.NODE_ENV || 'development'
 
-module.exports = {
+const config = {
   entry: ['./src/app.js'],
   output: {
     filename: 'bundle.js',
@@ -9,6 +10,7 @@ module.exports = {
   },
   devtool: 'source-map',
   module: {
+    preLoaders: [],
     loaders: [
       {
         test: /\.js$/,
@@ -28,4 +30,14 @@ module.exports = {
       template: 'index.html'
     })
   ]
-};
+}
+
+if (env === 'development') {
+  config.module.preLoaders.push({
+    test: /\.(js|jsx)$/,
+    exclude: /node_modules/,
+    loader: 'eslint-loader'
+  })
+}
+
+module.exports = config
