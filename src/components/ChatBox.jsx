@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import ReactDOM, { findDOMNode } from 'react-dom';
+import { findDOMNode } from 'react-dom'
 import { connect } from 'react-redux'
 import { addMessage } from 'actions/messages'
 
@@ -52,7 +52,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onClick: function(message) {
+    onClick: function (message) {
       return dispatch(addMessage(message))
     }
   }
