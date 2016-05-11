@@ -26,9 +26,9 @@ class ChatBox extends Component {
     return (
       <div>
         {
-          messages.map((message) => {
+          messages.map((message, index) => {
             return (
-              <div key={ message.text }>
+              <div key={ `chat-box-message-${index}` }>
                 { message.text }
               </div>
             )
