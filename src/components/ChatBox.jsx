@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { findDOMNode } from 'react-dom'
 import { connect } from 'react-redux'
 import { addMessage } from 'actions/messages'
 
@@ -13,11 +12,11 @@ class ChatBox extends Component {
     event.preventDefault()
 
     const { addMessageInput } = this.refs
-    const node = findDOMNode(addMessageInput)
+    let { value } = addMessageInput
 
-    if (node.value.length > 0) {
-      this.props.addMessage(node.value)
-      node.value = ''
+    if (value.length > 0) {
+      this.props.addMessage(value)
+      addMessageInput.value = ''
     }
   }
 
