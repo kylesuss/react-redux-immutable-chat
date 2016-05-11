@@ -12,7 +12,7 @@ class ChatBox extends Component {
     event.preventDefault()
 
     const { addMessageInput } = this.refs
-    let { value } = addMessageInput
+    const { value } = addMessageInput
 
     if (value.length > 0) {
       this.props.addMessage(value)
