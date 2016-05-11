@@ -1,7 +1,26 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
+import ReactDOM, { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux'
+import { addMessage } from 'actions/messages'
 
 class ChatBox extends Component {
+  static propTypes = {
+    onClick: PropTypes.func.isRequired,
+    messages: PropTypes.array.isRequired
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault()
+
+    const { addMessageInput } = this.refs
+    const node = findDOMNode(addMessageInput)
+
+    if (node.value.length > 0) {
+      this.props.onClick(node.value)
+      node.value = ''
+    }
+  }
+
   render () {
     const { messages } = this.props
 
@@ -10,10 +29,16 @@ class ChatBox extends Component {
         {
           messages.map((message) => {
             return (
-              <div>{ message.text }</div>
+              <div key={ message.text }>
+                { message.text }
+              </div>
             )
           })
         }
+        <form onSubmit={ this.handleSubmit }>
+          <input ref='addMessageInput' type='text' />
+          <input type='submit' />
+        </form>
       </div>
     )
   }
@@ -25,4 +50,15 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(ChatBox)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onClick: function(message) {
+      return dispatch(addMessage(message))
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ChatBox)
