@@ -5,7 +5,7 @@ import { addMessage } from 'actions/messages'
 
 class ChatBox extends Component {
   static propTypes = {
-    onClick: PropTypes.func.isRequired,
+    addMessage: PropTypes.func.isRequired,
     messages: PropTypes.array.isRequired
   }
 
@@ -16,7 +16,7 @@ class ChatBox extends Component {
     const node = findDOMNode(addMessageInput)
 
     if (node.value.length > 0) {
-      this.props.onClick(node.value)
+      this.props.addMessage(node.value)
       node.value = ''
     }
   }
@@ -52,7 +52,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onClick: function (message) {
+    addMessage: function (message) {
       return dispatch(addMessage(message))
     }
   }
