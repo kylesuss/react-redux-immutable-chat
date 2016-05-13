@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { addMessage } from 'actions/messages'
 import { List } from 'immutable'
+import styles from './ChatBox.css'
 
 class ChatBox extends Component {
   static propTypes = {
@@ -29,7 +30,8 @@ class ChatBox extends Component {
         {
           messages.map((message, index) => {
             return (
-              <div key={ `chat-box-message-${index}` }>
+              <div className={ styles.message }
+                   key={ `chat-box-message-${index}` }>
                 { message.get('text') }
               </div>
             )
