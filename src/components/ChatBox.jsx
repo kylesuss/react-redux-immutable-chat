@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { addMessage } from 'actions/messages'
+import { List } from 'immutable'
 
 class ChatBox extends Component {
   static propTypes = {
     addMessage: PropTypes.func.isRequired,
-    messages: PropTypes.array.isRequired
+    messages: PropTypes.instanceOf(List)
   }
 
   handleSubmit = (event) => {
@@ -29,7 +30,7 @@ class ChatBox extends Component {
           messages.map((message, index) => {
             return (
               <div key={ `chat-box-message-${index}` }>
-                { message.text }
+                { message.get('text') }
               </div>
             )
           })
@@ -51,9 +52,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addMessage: function (message) {
-      return dispatch(addMessage(message))
-    }
+    addMessage: (message) => dispatch(addMessage(message))
   }
 }
 
