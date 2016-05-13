@@ -10,6 +10,10 @@ class ChatBox extends Component {
     messages: PropTypes.instanceOf(List)
   }
 
+  componentDidMount () {
+    this.refs.addMessageInput.focus()
+  }
+
   handleSubmit = (event) => {
     event.preventDefault()
 
@@ -26,7 +30,7 @@ class ChatBox extends Component {
     const { messages } = this.props
 
     return (
-      <div>
+      <div className={ styles.chatBox }>
         {
           messages.map((message, index) => {
             return (
@@ -37,9 +41,8 @@ class ChatBox extends Component {
             )
           })
         }
-        <form onSubmit={ this.handleSubmit }>
+        <form className={ styles.form } onSubmit={ this.handleSubmit }>
           <input ref='addMessageInput' type='text' />
-          <input type='submit' />
         </form>
       </div>
     )

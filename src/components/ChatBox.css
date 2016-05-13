@@ -1,3 +1,25 @@
+.chatBox {
+  background: #222;
+  position: fixed;
+  bottom: 0;
+  right: 2em;
+  padding: 1em;
+  width: 300px;
+  max-height: 300px;
+}
+
+.form {
+  margin: 0;
+
+  input {
+    width: 100%;
+    border-radius: 3px;
+    border: 0;
+    outline: 0;
+    padding: .6em;
+  }
+}
+
 .message {
-  color: black;
+  color: #fff;
 }
