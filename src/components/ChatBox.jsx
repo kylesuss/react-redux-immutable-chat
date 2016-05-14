@@ -7,7 +7,7 @@ import styles from './ChatBox.css'
 class ChatBox extends Component {
   static propTypes = {
     addMessage: PropTypes.func.isRequired,
-    messages: PropTypes.instanceOf(List)
+    messages: PropTypes.instanceOf(List).isRequired
   }
 
   componentDidMount () {
