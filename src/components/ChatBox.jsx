@@ -1,29 +1,18 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { addMessage } from 'actions/messages'
+import { getMessages } from 'actions/messages'
 import { List } from 'immutable'
 import styles from './ChatBox.css'
+import ChatMessage from './ChatMessage'
+import ChatInput from './ChatInput'
 
 class ChatBox extends Component {
   static propTypes = {
-    addMessage: PropTypes.func.isRequired,
     messages: PropTypes.instanceOf(List).isRequired
   }
 
   componentDidMount () {
-    this.refs.addMessageInput.focus()
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault()
-
-    const { addMessageInput } = this.refs
-    const { value } = addMessageInput
-
-    if (value.length > 0) {
-      this.props.addMessage(value)
-      addMessageInput.value = ''
-    }
+    this.props.getMessages()
   }
 
   render () {
@@ -32,18 +21,14 @@ class ChatBox extends Component {
     return (
       <div className={ styles.chatBox }>
         {
-          messages.map((message, index) => {
+          messages && messages.map((message, index) => {
             return (
-              <div className={ styles.message }
-                   key={ `chat-box-message-${index}` }>
-                { message.get('text') }
-              </div>
+              <ChatMessage message={ message }
+                           key={ `chat-message-${index}` } />
             )
           })
         }
-        <form className={ styles.form } onSubmit={ this.handleSubmit }>
-          <input ref='addMessageInput' type='text' />
-        </form>
+        <ChatInput />
       </div>
     )
   }
@@ -55,13 +40,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addMessage: (message) => dispatch(addMessage(message))
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ChatBox)
+export default connect(mapStateToProps, {
+  getMessages
+})(ChatBox)

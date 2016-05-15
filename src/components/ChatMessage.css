@@ -1,0 +1,11 @@
+.message {
+  color: #fff;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 0.75em;
+  background: #ccc;
+}
